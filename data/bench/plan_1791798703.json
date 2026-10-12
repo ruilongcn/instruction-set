@@ -1,0 +1,48 @@
+{
+  "isa_name": "CNISA-32",
+  "conformance_tests": [
+    {
+      "suite": "riscv-tests",
+      "scope": "RV32I/RV64I 基础指令逐一验证",
+      "pass_criteria": "100% 通过"
+    },
+    {
+      "suite": "riscv-arch-test",
+      "scope": "架构合规（含 CSR/异常行为）",
+      "pass_criteria": "全部通过"
+    },
+    {
+      "suite": "riscv-dv",
+      "scope": "随机指令生成 + 差异化比对",
+      "pass_criteria": "无分歧"
+    },
+    {
+      "suite": "自主扩展用例",
+      "scope": "厂商扩展指令功能点全覆盖",
+      "pass_criteria": "100% 通过"
+    }
+  ],
+  "benchmarks": {
+    "CoreMark": "嵌入式处理器综合性能",
+    "Dhrystone": "整数指令吞吐",
+    "Whetstone": "浮点性能",
+    "SPEC CPU2017": "通用计算性能（长期目标）",
+    "自研微基准": "访存延迟/分支预测命中率/发射带宽"
+  },
+  "tooling": [
+    "QEMU riscv（参考模型）",
+    "Spike（ISA 参考）",
+    "Verilator（RTL 快速仿真）",
+    "GTKWave 波形",
+    "performance-counters 硬件性能计数器"
+  ],
+  "workflow": [
+    "静态合规 → 随机验证 → 基准采集 → 回归门禁（CI）"
+  ],
+  "generated_at": 1791798703,
+  "_meta": {
+    "agent": "compat_bench",
+    "agent_id": "compat_bench_309f2454",
+    "ts": 1791798703
+  }
+}

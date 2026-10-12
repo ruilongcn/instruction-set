@@ -1,0 +1,47 @@
+{
+  "action": "encode",
+  "count": 6,
+  "items": [
+    {
+      "asm": "add x1, x2, x3",
+      "hex": "0x003100B3",
+      "bin": "00000000001100010000000010110011",
+      "ok": true
+    },
+    {
+      "asm": "addi x1, x2, 100",
+      "hex": "0x06410093",
+      "bin": "00000110010000010000000010010011",
+      "ok": true
+    },
+    {
+      "asm": "lw x4, 8(x5)",
+      "error": "list index out of range",
+      "ok": false
+    },
+    {
+      "asm": "sw x6, 4(x7)",
+      "error": "list index out of range",
+      "ok": false
+    },
+    {
+      "asm": "beq x1, x2, 8",
+      "hex": "0x00208463",
+      "bin": "00000000001000001000010001100011",
+      "ok": true
+    },
+    {
+      "asm": "jal x1, 1024",
+      "hex": "0x400000EF",
+      "bin": "01000000000000000000000011101111",
+      "ok": true
+    }
+  ],
+  "note": "RV32I 子集编码示例（ADD/SUB/ADDI/LW/SW/BEQ/JAL），完整实现见 ISA 规范",
+  "generated_at": 1791798703,
+  "_meta": {
+    "agent": "encoder_decoder",
+    "agent_id": "encoder_decoder_09b108eb",
+    "ts": 1791798703
+  }
+}

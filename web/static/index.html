@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>指令集研发智能体团队</title>
+<link rel="stylesheet" href="/static/style.css?v=1">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>指令集研发智能体团队</h1>
+    <span class="sub">Instruction Set R&amp;D Agent Team · 自主可控 ISA</span>
+  </div>
+  <nav class="tabs" id="navTabs">
+    <button class="tab active" data-view="isa">ISA 设计</button>
+    <button class="tab" data-view="encode">编码/解码</button>
+    <button class="tab" data-view="asm">汇编/反汇编</button>
+    <button class="tab" data-view="microarch">微架构映射</button>
+    <button class="tab" data-view="eco">RISC-V 生态</button>
+    <button class="tab" data-view="bench">兼容与基准</button>
+    <button class="tab" data-view="pipeline">流水线编排</button>
+    <button class="tab" data-view="system">系统健康</button>
+  </nav>
+</header>
+
+<main class="container">
+  <!-- ISA 设计 -->
+  <section id="view-isa" class="view active">
+    <div class="panel-head">
+      <h2>ISA 架构自主设计</h2>
+      <p class="hint">设计自主指令集规格：寄存器文件、指令格式、扩展规划、自主可控分析。</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <label>ISA 名称 <input id="isaName" value="CNISA-32" /></label>
+        <label>字长 <select id="isaXlen"><option value="32" selected>32 位</option><option value="64">64 位</option></select></label>
+        <label>兼容基线 <input id="isaBase" value="RV32I" /></label>
+        <label>扩展（逗号分隔） <input id="isaExt" value="M,C,Zicsr" /></label>
+        <button class="btn primary" onclick="isaDesign()">生成 ISA 规格</button>
+        <div id="isaResult" class="facts-panel hidden"></div>
+      </div>
+      <div class="card">
+        <h3>定义自主扩展指令</h3>
+        <label>扩展名 <input id="extName" value="CNX1" /></label>
+        <label>描述 <input id="extDesc" value="AI 加速自定义指令扩展" /></label>
+        <button class="btn primary" onclick="extDefine()">定义扩展</button>
+        <div id="extResult" class="facts-panel hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 编码/解码 -->
+  <section id="view-encode" class="view">
+    <div class="panel-head"><h2>指令编码 / 解码器</h2>
+      <p class="hint">将 RV32I 子集汇编指令编码为机器码（R/I/S/B/U/J 格式位域），或反解码。</p></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>编码</h3>
+        <label>指令列表（每行一条）<textarea id="encInput" rows="7">add x1, x2, x3
+addi x1, x2, 100
+lw x4, 8(x5)
+sw x6, 4(x7)
+beq x1, x2, 8
+jal x1, 1024</textarea></label>
+        <button class="btn primary" onclick="encRun()">编码</button>
+        <div id="encResult" class="facts-panel hidden"></div>
+      </div>
+      <div class="card">
+        <h3>解码</h3>
+        <label>机器码（逗号分隔十六进制）<input id="decInput" value="0x002080B3, 0x06410093, 0x0082A283" /></label>
+        <button class="btn primary" onclick="decRun()">解码</button>
+        <div id="decResult" class="facts-panel hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 汇编/反汇编 -->
+  <section id="view-asm" class="view">
+    <div class="panel-head"><h2>汇编器 / 反汇编器</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>汇编</h3>
+        <textarea id="asmInput" rows="8">.text
+add x1, x2, x3
+addi x1, x2, 100
+lw x4, 8(x5)
+sw x6, 4(x7)
+beq x1, x2, 8</textarea>
+        <button class="btn primary" onclick="asmRun()">汇编</button>
+        <div id="asmResult" class="facts-panel hidden"></div>
+      </div>
+      <div class="card">
+        <h3>反汇编</h3>
+        <input id="disasmInput" value="0x002080B3, 0x06410093" />
+        <button class="btn primary" onclick="disasmRun()">反汇编</button>
+        <div id="disasmResult" class="facts-panel hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 微架构映射 -->
+  <section id="view-microarch" class="view">
+    <div class="panel-head"><h2>微架构映射</h2></div>
+    <div class="card">
+      <label>超标量 <input type="checkbox" id="maSuper" checked /></label>
+      <button class="btn primary" onclick="maRun()">生成微架构映射</button>
+      <div id="maResult" class="facts-panel hidden"></div>
+    </div>
+  </section>
+
+  <!-- RISC-V 生态 -->
+  <section id="view-eco" class="view">
+    <div class="panel-head"><h2>RISC-V 开放指令集生态</h2></div>
+    <div class="card">
+      <button class="btn primary" onclick="ecoSweep()">生态全景调研</button>
+      <div id="ecoResult" class="facts-panel hidden"></div>
+    </div>
+    <div class="card">
+      <h3>自主 ISA 兼容策略</h3>
+      <label>目标 ISA <input id="ecoCompatIsa" value="CNISA-32" /></label>
+      <button class="btn primary" onclick="ecoCompat()">生成兼容策略</button>
+      <div id="ecoCompatResult" class="facts-panel hidden"></div>
+    </div>
+  </section>
+
+  <!-- 兼容与基准 -->
+  <section id="view-bench" class="view">
+    <div class="panel-head"><h2>兼容性与基准测试</h2></div>
+    <div class="card">
+      <button class="btn primary" onclick="benchPlan()">合规测试规划</button>
+      <div id="benchPlanResult" class="facts-panel hidden"></div>
+    </div>
+    <div class="card">
+      <h3>基准测试（估算）</h3>
+      <label>用例（逗号分隔） <input id="benchCases" value="coremark,dhrystone,micro_alu" /></label>
+      <button class="btn primary" onclick="benchRun()">执行基准</button>
+      <div id="benchResult" class="facts-panel hidden"></div>
+    </div>
+  </section>
+
+  <!-- 流水线编排 -->
+  <section id="view-pipeline" class="view">
+    <div class="panel-head"><h2>多智能体流水线</h2>
+      <p class="hint">输入目标描述，Orchestrator 自动规划并路由到对应 Agent 团队执行。</p></div>
+    <div class="card">
+      <label>目标描述 <textarea id="plGoal" rows="3">设计一个自主指令集并完成编码与合规测试规划</textarea></label>
+      <button class="btn primary" onclick="plRun()">启动流水线</button>
+      <div id="plResult" class="facts-panel hidden"></div>
+    </div>
+  </section>
+
+  <!-- 系统健康 -->
+  <section id="view-system" class="view">
+    <div class="panel-head"><h2>系统健康</h2></div>
+    <div id="sysCards" class="grid-2"></div>
+    <div class="card"><details id="sysRaw"><summary>展开查看 /api/health 与 /api/agents 原始 JSON</summary>
+      <pre id="sysHealth" class="preview">加载中...</pre>
+      <pre id="sysAgents" class="preview">加载中...</pre></details></div>
+  </section>
+</main>
+
+<footer class="footer">指令集研发智能体团队 · 本地优先 · 自主可控</footer>
+<script src="/static/app.js?v=1"></script>
+</body>
+</html>

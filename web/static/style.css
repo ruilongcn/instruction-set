@@ -1,0 +1,31 @@
+/* 指令集研发智能体团队 - 前端样式 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; background: #f5f7fa; color: #1f2937; }
+.topbar { background: linear-gradient(135deg, #0f172a, #1e3a5f); color: #fff; padding: 14px 24px; }
+.brand h1 { font-size: 20px; }
+.brand .sub { font-size: 12px; opacity: .75; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tab { background: rgba(255,255,255,.12); border: none; color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.tab.active { background: #3b82f6; }
+.container { max-width: 1200px; margin: 20px auto; padding: 0 16px; }
+.view { display: none; }
+.view.active { display: block; }
+.panel-head { margin-bottom: 12px; }
+.panel-head h2 { font-size: 18px; }
+.hint { color: #6b7280; font-size: 12px; margin: 4px 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+.card h3 { font-size: 14px; margin-bottom: 8px; }
+label { display: block; font-size: 13px; margin-bottom: 10px; }
+input, select, textarea { width: 100%; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; margin-top: 4px; font-family: inherit; }
+textarea { resize: vertical; }
+.btn { padding: 8px 16px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; cursor: pointer; font-size: 13px; margin: 4px 4px 0 0; }
+.btn.primary { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+.facts-panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 13px; white-space: pre-wrap; word-break: break-all; max-height: 480px; overflow: auto; }
+.preview { background: #0f172a; color: #a5f3fc; padding: 10px; border-radius: 8px; font-size: 12px; overflow: auto; max-height: 320px; }
+.footer { text-align: center; color: #9ca3af; font-size: 12px; padding: 20px; }
+.hidden { display: none; }
+table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+.data-table th, .data-table td { border: 1px solid #e5e7eb; padding: 8px; text-align: left; }
+.data-table th { background: #f1f5f9; }

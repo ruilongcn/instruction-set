@@ -1,0 +1,83 @@
+{
+  "isa_name": "CNISA-32",
+  "xlen": 32,
+  "base": "RV32I",
+  "register_file": {
+    "count": 32,
+    "width": 32,
+    "special": {
+      "x0": "硬连线零寄存器",
+      "x1/ra": "返回地址",
+      "x2/sp": "栈指针",
+      "x8/fp": "帧指针",
+      "x10-x17/a0-a7": "参数/返回值"
+    }
+  },
+  "instruction_formats": [
+    "R",
+    "I",
+    "S",
+    "B",
+    "U",
+    "J"
+  ],
+  "opcode_baseline": {
+    "LUI": "0110111",
+    "AUIPC": "0010111",
+    "JAL": "1101111",
+    "JALR": "1100111",
+    "BRANCH": "1100011",
+    "LOAD": "0000011",
+    "STORE": "0100011",
+    "OP_IMM": "0010011",
+    "OP": "0110011",
+    "SYSTEM": "1110011"
+  },
+  "instruction_groups": [
+    "算术逻辑",
+    "访存",
+    "分支跳转",
+    "系统",
+    "原子/同步",
+    "压缩指令"
+  ],
+  "addressing_modes": [
+    "立即数",
+    "寄存器",
+    "基址偏移",
+    "PC相对"
+  ],
+  "privilege_levels": [
+    "U",
+    "S",
+    "M"
+  ],
+  "extensions_plan": [
+    {
+      "name": "M",
+      "status": "planned",
+      "note": "乘除法扩展：mul/div/rem 指令"
+    },
+    {
+      "name": "C",
+      "status": "planned",
+      "note": "压缩指令扩展：16 位指令缩短代码体积"
+    }
+  ],
+  "autonomy_analysis": {
+    "open_baseline": true,
+    "open_standard": "RISC-V 开放指令集生态（ISA 规范开放、免许可费）",
+    "self_designed_parts": [
+      "扩展指令编码分配",
+      "自定义系统寄存器",
+      "厂商扩展位"
+    ],
+    "compliance_target": "riscv-isa-sim / riscv-tests 可运行验证"
+  },
+  "generated_at": 1791798703,
+  "_meta": {
+    "agent": "isa_architect",
+    "agent_id": "isa_architect_290e7a83",
+    "ts": 1791798703
+  }
+}
